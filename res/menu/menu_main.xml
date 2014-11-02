@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+        android:id="@+id/icon"
+        android:showAsAction="collapseActionView"
+        android:title="Settings"/>
+	<item
+        android:id="@+id/icon_0"
+        android:showAsAction="collapseActionView"
+        android:title="About"/>
+ 
+</menu>
