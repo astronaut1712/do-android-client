@@ -61,8 +61,11 @@
 # view res/layout/slidingmenumain.xml #generated:2
 -keep class com.jeremyfeinstein.slidingmenu.lib.SlidingMenu { <init>(...); }
 
-# view AndroidManifest.xml #generated:17
+# view AndroidManifest.xml #generated:18
 -keep class com.nxquang.docpanel.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:12
+-keep class com.nxquang.docpanel.MyApplication { <init>(...); }
 
 # view res/layout/main_menu.xml #generated:11
 -keep class com.nxquang.docpanel.customviews.RoundedImageView { <init>(...); }

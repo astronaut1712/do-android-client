@@ -24,6 +24,7 @@ import android.os.Bundle;
 public class MainActivity extends SlidingFragmentActivity {
 
 	Context context;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,9 +39,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setShadowDrawable(R.drawable.shadow);
 		setSlidingActionBarEnabled(false);
 		
-		RequestQueue queue = Volley.newRequestQueue(this);
-        
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, Constants.API.BASE_URL + Constants.API.DOMAINS, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, Constants.API_BASE_URL + Constants.API_DOMAINS, null, new Response.Listener<JSONObject>() {
  
             @Override
             public void onResponse(JSONObject response) {
@@ -61,7 +60,7 @@ public class MainActivity extends SlidingFragmentActivity {
         		return headers;
         	}
         };
-        queue.add(jsObjRequest);
+        ((MyApplication)getApplication()).getQueue().add(jsObjRequest);
 		
 	}
 	
