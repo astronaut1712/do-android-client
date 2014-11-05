@@ -1,10 +1,5 @@
 package com.nxquang.docpanel.fragments;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,16 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.nxquang.docpanel.Constants;
-import com.nxquang.docpanel.MyApplication;
 import com.nxquang.docpanel.R;
 import com.nxquang.docpanel.adapters.MenuAdapter;
-import com.nxquang.docpanel.model.Client;
 import com.nxquang.docpanel.model.MainMenuItem;
 
 
@@ -58,30 +47,10 @@ public class MainMenu extends SherlockListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, Constants.API_BASE_URL + Constants.API_DROPLETS, null, new Response.Listener<JSONObject>() {
-			 
-            @Override
-            public void onResponse(JSONObject response) {
-                Constants.logger("Response => "+response.toString());
-                
-            }            
-        }, new Response.ErrorListener() {
- 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                
-            }
-        }){
-        	@Override
-        	public Map<String, String> getHeaders() throws AuthFailureError {
-        		Map<String, String> headers = new HashMap<String, String>();
-        		headers.put("Authorization", "Bearer " + Client.getInstance().getToken(getActivity().getApplicationContext()));
-        		return headers;
-        	}
-        };
-        ((MyApplication)getActivity().getApplication()).getQueue().add(jsObjRequest);
 		MainMenuItem item = adapter.getItem(position);
 		getFragmentManager().beginTransaction().replace(R.id.content_frame, FragmentFactory.getInstance().getFragment(item.tagId)).addToBackStack(null).commit();
+		getSherlockActivity().getSupportActionBar().setTitle(item.tagTitle);
+		((SlidingFragmentActivity)getActivity()).showContent();
 	}
 	
 }

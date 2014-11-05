@@ -7,11 +7,9 @@ import org.json.JSONObject;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.nxquang.docpanel.R;
@@ -39,28 +37,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setShadowDrawable(R.drawable.shadow);
 		setSlidingActionBarEnabled(false);
 		
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, Constants.API_BASE_URL + Constants.API_DOMAINS, null, new Response.Listener<JSONObject>() {
- 
-            @Override
-            public void onResponse(JSONObject response) {
-                Constants.logger("Response => "+response.toString());
-                
-            }            
-        }, new Response.ErrorListener() {
- 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                
-            }
-        }){
-        	@Override
-        	public Map<String, String> getHeaders() throws AuthFailureError {
-        		Map<String, String> headers = new HashMap<String, String>();
-        		headers.put("Authorization", "Bearer " + Client.getInstance().getToken(context));
-        		return headers;
-        	}
-        };
-        ((MyApplication)getApplication()).getQueue().add(jsObjRequest);
+		getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 		
 	}
 	
@@ -68,6 +45,12 @@ public class MainActivity extends SlidingFragmentActivity {
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		
 	}
 	
 }
